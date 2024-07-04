@@ -1,0 +1,22 @@
+{
+  "dependencies": [
+    "openssl",
+    "rapidjson",
+    "cpp-httplib",
+    {
+      "name":"curl",
+      "version>=": "8.2.1"
+    },
+    {
+       "name":"protobuf",
+       "version>=":"3.21.12"
+    }
+  ],
+  "overrides": [
+    {
+      "name": "openssl",
+      "version-string": "1.1.1n"
+    }
+  ],
+  "builtin-baseline": "a6657c38d506872a735f444159f31887791b07d3"
+}
