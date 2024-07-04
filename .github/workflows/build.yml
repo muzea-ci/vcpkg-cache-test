@@ -1,0 +1,41 @@
+name: build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2019
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x86
+      - name: Cache vcpkg
+        uses: actions/cache@v4
+        with:
+          path: |
+            C:\vcpkg\buildtrees
+            C:\vcpkg\downloads
+            C:\vcpkg\installed
+            C:\vcpkg\packages
+          key: vcpkg-cache-${{ github.run_id }}
+          restore-keys: |
+            vcpkg-cache-
+      - name: Cache vcpkg archives
+        uses: actions/cache@v4
+        with:
+          path: |
+            %LocalAppData%\vcpkg\archives
+          key: vcpkg-archives-${{ github.run_id }}
+          restore-keys: |
+            vcpkg-archives-
+      - name: Build
+        run: |
+          vcpkg install
+          echo $env:LOCALAPPDATA
+          $ArchivePath="$env:LOCALAPPDATA\vcpkg\archives"
+          echo $ArchivePath
