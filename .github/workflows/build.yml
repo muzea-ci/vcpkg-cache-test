@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            %LocalAppData%\vcpkg\archives
+            C:\Users\runneradmin\AppData\Local\vcpkg\archives
           key: vcpkg-archives-${{ github.run_id }}
           restore-keys: |
             vcpkg-archives-
